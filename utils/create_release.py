@@ -18,6 +18,7 @@ FILE_GLOB_LIST = [
     # template files
     "LICENSE",
     "README.md",
+    "README.pdf",
     "CHANGELOG.md",
     "shcmthesis.dtx",
     "shcmthesis.ins",
@@ -30,9 +31,7 @@ FILE_GLOB_LIST = [
     "shcmsetup.tex",
     "data/*.tex",
     "figures/*",
-    "ref/*.bib",
     # others
-    ".vscode/*",
 ]
 
 

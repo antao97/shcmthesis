@@ -169,7 +169,7 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
 语句二
 ```
 
-使用快捷键为`Ctrl+t`（苹果电脑为`Command+t`）
+使用快捷键为`Ctrl+/`（苹果电脑为`Command+/`）
 
 ### 段落设置
 

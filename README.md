@@ -37,7 +37,7 @@
   * 仅下载：
     * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
   * Overleaf在线编辑：
-    * 网页模板模板:（开发中）
+    * 网页模板模板：[网址](https://www.overleaf.com/latex/templates/shcmthesis-shang-hai-yin-le-xue-yuan-xue-wei-lun-wen-latex-mo-ban/nmwwrrnkyyxx)
     * 手动上传: 参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第二章LaTeX编译”
 
 ### 开发版

@@ -31,7 +31,6 @@ FILE_GLOB_LIST = [
     "shcmsetup.tex",
     "data/*.tex",
     "figures/*",
-    "figures/*/*",
     # others
 ]
 

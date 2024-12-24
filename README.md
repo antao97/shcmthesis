@@ -196,7 +196,7 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
 
 ### 其他设置
 
-详细使用介绍请参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第一章LaTeX介绍”，包含了如何插入图片和表格的介绍。
+详细使用介绍请参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第一章LaTeX介绍”。
 
 ## 更新日志
 

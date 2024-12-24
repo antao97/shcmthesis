@@ -5,6 +5,7 @@ node_modules/
 dist/
 shcmthesis*.zip
 shcmthesis-ctan/
+.idea/
 
 ## generated files:
 dtx-style.sty

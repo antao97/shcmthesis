@@ -20,7 +20,11 @@
 
 另外，本人并不是上海音乐学院的学生或者老师，受朋友所托开发编写，如格式有错误或者遗漏，欢迎指出。
 
-如果有疑问，可以在[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn）。
+如果有疑问，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn）。
+
+由于访问GitHub网站可能会遇到一些困难，本仓库同时发布了[知乎文档](https://zhuanlan.zhihu.com/p/14553247725)供转发使用。
+
+**转载须知：请尊重作者版权，不要删除模板的作者信息，如需转载请提供[知乎文档链接](https://zhuanlan.zhihu.com/p/14553247725)或者[GitHub网站](https://github.com/antao97/shcmthesis)链接。**
 
 ## 下载
 
@@ -33,11 +37,15 @@
 
 [//]: # (### 下载途径)
 
+以下任一种方式均可获取模板
+
 ### 发布版
+
   * 仅下载：
+    * [百度网盘](https://pan.baidu.com/s/1nAXSsBLNU1b4q73m6GfXbQ)（提取码: w7hu）
     * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
   * Overleaf在线编辑：
-    * 网页模板模板：[网址](https://www.overleaf.com/latex/templates/shcmthesis-shang-hai-yin-le-xue-yuan-xue-wei-lun-wen-latex-mo-ban/nmwwrrnkyyxx)
+    * [网页模板](https://www.overleaf.com/latex/templates/shcmthesis-shang-hai-yin-le-xue-yuan-xue-wei-lun-wen-latex-mo-ban/nmwwrrnkyyxx)（推荐）
     * 手动上传: 参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第二章LaTeX编译”
 
 ### 开发版
@@ -79,6 +87,8 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
   * 待赋值变量：`title-1`、`title-1`、`title-1*`、`title-2*`
 * 论文编号：
   * 待赋值变量：`thesis-id`
+* 学校代码：
+  * 待赋值变量：`school-id`
 * 学科专业：
   * 待赋值变量：`discipline`
 * 作者姓名：
@@ -191,26 +201,24 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
 ```
 ### 图片和表格
 
-详细使用介绍请参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第一章LaTeX介绍”，包含了如何插入图片和表格的介绍。
+详细使用介绍请参考模板内[shcmthesis-example.pdf](shcmthesis-example.pdf)的“第一章LaTeX介绍”，包含了如何插入图片和表格的介绍。
 
 
 ### 其他设置
 
-详细使用介绍请参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第一章LaTeX介绍”。
+详细使用介绍请参考模板内[shcmthesis-example.pdf](shcmthesis-example.pdf)的“第一章LaTeX介绍”。
 
 ## 更新日志
 
-每个版本的详细更新日志，请见 [CHANGELOG.md](CHANGELOG.md)。使用文档中也包含了这一内容。
+每个版本的详细更新日志，请见模板内 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 升级
 
-### 手动更新
-
-#### 发布版
+### 发布版
 
 下载发布版的的 zip 包，使用其中的 `shcmthesis.cls` 等文件覆盖原有的即可，无须额外操作。
 
-#### 开发版
+### 开发版
 
 从 GitHub clone 项目源码或者下载源码 zip 包，执行 `xetex shcmthesis.ins`。
 

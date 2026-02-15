@@ -567,3 +567,31 @@ width=1\textbackslash textwidth 是一个可选的参数，它指定图片的宽
 效果为：
 
 此处引用图~\ref{fig:multi-image}，及其图~\ref{fig:subfig-b}和图~\ref{fig:subfig-b}。
+
+\section{谱例}
+
+对于音乐类论文，常需要使用谱例。本模板提供了专门的 \env{score} 环境来处理谱例，用法与 \env{figure} 环境类似，但编号和标题使用「谱例」前缀。
+
+例如：
+
+\begin{python}
+\begin{score}
+	\centering
+	\includegraphics[width=0.8\linewidth]{example-image-a.pdf}
+	\caption{示例谱例标题}
+	\label{score:example}
+\end{score}
+\end{python}
+
+效果如下：
+
+\begin{score}
+	\centering
+	\includegraphics[width=0.8\linewidth]{example-image-a.pdf}
+	\caption{示例谱例标题}
+	\label{score:example}
+\end{score}
+
+谱例的引用方式与图片相同，使用 \cs{ref\{score:example\}} 即可引用谱例~\ref{score:example}。
+
+谱例清单可以使用 \cs{listofscores} 命令生成，用法与 \cs{listoffigures} 类似。

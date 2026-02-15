@@ -466,6 +466,7 @@
   \def\thu@resolution@name{答辩委员会决议书}%
   \def\listfigurename{插图清单}%
   \def\listtablename{附表清单}%
+  \def\listscorename{谱例清单}%
   \def\thu@list@figure@table@name{插图和附表清单}%
   \def\thu@list@algorithm@name{算法清单}%
   \def\listequationname{公式清单}%
@@ -484,6 +485,7 @@
       figurename = 图,
       tablename  = 表,
     }%
+    \def\scorename{谱例}%
     \def\thu@algorithm@name{算法}%
     \def\thu@equation@name{公式}%
     \def\thu@assumption@name{假设}%
@@ -506,6 +508,8 @@
         figurename = {Figure},
         tablename  = {Table},
       }%
+      \def\scorename{Score}%
+      \def\listscorename{List of Scores}%
       \def\thu@algorithm@name{Algorithm}%
       \def\thu@equation@name{Equation}%
       \def\thu@assumption@name{Assumption}%
@@ -1594,6 +1598,10 @@
 }
 \def\fps@figure{htbp}
 \def\fps@table{htbp}
+\def\fps@score{htbp}
+\def\ftype@score{5}
+\def\ext@score{los}
+\def\fname@score{\scorename}
 \setlength{\floatsep}{12\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength{\textfloatsep}{12\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength{\intextsep}{12\p@ \@plus 2\p@ \@minus 2\p@}
@@ -1643,6 +1651,10 @@
     name    = equation@number@separator,
     default = {.},
   },
+  score-number-separator = {
+    name    = score@number@separator,
+    default = {-},
+  },
   number-separator = {
     name    = number@separator,
     default = {.},
@@ -1669,10 +1681,19 @@
   \fi
   \@arabic\c@equation
 }
+\newcounter{score}
+\renewcommand\thescore{%
+  \ifnum\c@chapter>\z@
+    \thechapter
+    \thu@score@number@separator
+  \fi
+  \@arabic\c@score
+}
 \newcommand\thu@set@number@separator{%
   \let\thu@figure@number@separator\thu@number@separator
   \let\thu@table@number@separator\thu@number@separator
   \let\thu@equation@number@separator\thu@number@separator
+  \let\thu@score@number@separator\thu@number@separator
 }
 \thu@option@hook{number-separator}{\thu@set@number@separator}
 \DeclareCaptionFont{thu}{%
@@ -1686,6 +1707,7 @@
     \fi
   \fi
 }
+\DeclareCaptionType{score}
 \captionsetup{
   font           = thu,
   labelsep       = quad,
@@ -1693,7 +1715,10 @@
   figureposition = bottom,
   tableposition  = top,
 }
+\def\fnum@score{\scorename~\thescore}
 \captionsetup[sub]{font=thu}
+% \newenvironment{score}{\@float{score}}{\end@float}
+% \newenvironment{score*}{\@dblfloat{score}}{\end@dblfloat}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \newcommand\thu@set@table@font{
@@ -2960,6 +2985,18 @@
 \titlecontents{table}
   [\z@]{}
   {\contentspush{\tablename~\thecontentslabel\quad}}{}
+  {\thu@leaders\thecontentspage}
+\renewcommand\listofscores{%
+  \ifthu@degree@bachelor
+    \ifthu@backmatter\else
+      \thu@warning{The list of scores should be placed in back matter}%
+    \fi
+  \fi
+  \thu@listof{score}%
+}
+\titlecontents{score}
+  [\z@]{}
+  {\contentspush{\scorename~\thecontentslabel\quad}}{}
   {\thu@leaders\thecontentspage}
 \newcommand\listoffiguresandtables{%
   \ifthu@degree@bachelor

@@ -1327,7 +1327,7 @@
 %<*cls>
 \hyphenation{Thu-Thesis}
 \def\thuthesis{thuthesis}
-\def\version{1.0}
+\def\version{1.2}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -1962,6 +1962,7 @@
   \def\thu@resolution@name{答辩委员会决议书}%
   \def\listfigurename{插图清单}%
   \def\listtablename{附表清单}%
+  \def\listscorename{谱例清单}%
   \def\thu@list@figure@table@name{插图和附表清单}%
   \def\thu@list@algorithm@name{算法清单}%
   \def\listequationname{公式清单}%
@@ -1987,6 +1988,8 @@
     }%
     \def\thu@algorithm@name{算法}%
     \def\thu@equation@name{公式}%
+    \def\scorename{谱例}%
+    \def\listscorename{谱例清单}%
     \def\thu@assumption@name{假设}%
     \def\thu@definition@name{定义}%
     \def\thu@proposition@name{命题}%
@@ -2009,6 +2012,8 @@
       }%
       \def\thu@algorithm@name{Algorithm}%
       \def\thu@equation@name{Equation}%
+      \def\scorename{Score}%
+      \def\listscorename{List of Scores}%
       \def\thu@assumption@name{Assumption}%
       \def\thu@definition@name{Definition}%
       \def\thu@proposition@name{Proposition}%
@@ -3449,6 +3454,10 @@
 %    \begin{macrocode}
 \def\fps@figure{htbp}
 \def\fps@table{htbp}
+\def\fps@score{htbp}
+\def\ftype@score{5}
+\def\ext@score{los}
+\def\fname@score{\scorename}
 %    \end{macrocode}
 %
 % 设置浮动对象和文字之间的距离
@@ -3543,10 +3552,19 @@
   \fi
   \@arabic\c@equation
 }
+\newcounter{score}
+\renewcommand\thescore{%
+  \ifnum\c@chapter>\z@
+    \thechapter
+    \thu@score@number@separator
+  \fi
+  \@arabic\c@score
+}
 \newcommand\thu@set@number@separator{%
   \let\thu@figure@number@separator\thu@number@separator
   \let\thu@table@number@separator\thu@number@separator
   \let\thu@equation@number@separator\thu@number@separator
+  \let\thu@score@number@separator\thu@number@separator
 }
 \thu@option@hook{number-separator}{\thu@set@number@separator}
 %    \end{macrocode}
@@ -3580,6 +3598,8 @@
 \captionsetup[sub]{font=thu}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
+\DeclareCaptionType{score}
+\def\fnum@score{\scorename~\thescore}
 % \renewcommand{\p@subfigure}{:}
 %    \end{macrocode}
 %
@@ -5200,9 +5220,21 @@
   \fi
   \thu@listof{table}%
 }
+\renewcommand\listofscores{%
+  \ifthu@degree@bachelor
+    \ifthu@backmatter\else
+      \thu@warning{The list of scores should be placed in back matter}%
+    \fi
+  \fi
+  \thu@listof{score}%
+}
 \titlecontents{table}
   [\z@]{}
   {\contentspush{\tablename~\thecontentslabel\quad}}{}
+  {\thu@leaders\thecontentspage}
+\titlecontents{score}
+  [\z@]{}
+  {\contentspush{\scorename~\thecontentslabel\quad}}{}
   {\thu@leaders\thecontentspage}
 %    \end{macrocode}
 % \end{macro}
@@ -5257,6 +5289,7 @@
   {\thu@equation@name~\thecontentslabel}{}
   {\nobreak\thu@leaders\nobreak\thecontentspage}
 \contentsuse{equation}{loe}
+\contentsuse{score}{los}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}

@@ -61,7 +61,7 @@
 }
 \hyphenation{Thu-Thesis}
 \def\thuthesis{thuthesis}
-\def\version{1.0}
+\def\version{1.2}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -485,9 +485,10 @@
       figurename = 图,
       tablename  = 表,
     }%
-    \def\scorename{谱例}%
     \def\thu@algorithm@name{算法}%
     \def\thu@equation@name{公式}%
+    \def\scorename{谱例}%
+    \def\listscorename{谱例清单}%
     \def\thu@assumption@name{假设}%
     \def\thu@definition@name{定义}%
     \def\thu@proposition@name{命题}%
@@ -508,10 +509,10 @@
         figurename = {Figure},
         tablename  = {Table},
       }%
-      \def\scorename{Score}%
-      \def\listscorename{List of Scores}%
       \def\thu@algorithm@name{Algorithm}%
       \def\thu@equation@name{Equation}%
+      \def\scorename{Score}%
+      \def\listscorename{List of Scores}%
       \def\thu@assumption@name{Assumption}%
       \def\thu@definition@name{Definition}%
       \def\thu@proposition@name{Proposition}%
@@ -1651,10 +1652,6 @@
     name    = equation@number@separator,
     default = {.},
   },
-  score-number-separator = {
-    name    = score@number@separator,
-    default = {-},
-  },
   number-separator = {
     name    = number@separator,
     default = {.},
@@ -1707,7 +1704,6 @@
     \fi
   \fi
 }
-\DeclareCaptionType{score}
 \captionsetup{
   font           = thu,
   labelsep       = quad,
@@ -1715,12 +1711,11 @@
   figureposition = bottom,
   tableposition  = top,
 }
-\def\fnum@score{\scorename~\thescore}
 \captionsetup[sub]{font=thu}
-% \newenvironment{score}{\@float{score}}{\end@float}
-% \newenvironment{score*}{\@dblfloat{score}}{\end@dblfloat}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
+\DeclareCaptionType{score}
+\def\fnum@score{\scorename~\thescore}
 \newcommand\thu@set@table@font{
   \ifthu@language@chinese
     \def\thu@table@font{%
@@ -2982,10 +2977,6 @@
   \fi
   \thu@listof{table}%
 }
-\titlecontents{table}
-  [\z@]{}
-  {\contentspush{\tablename~\thecontentslabel\quad}}{}
-  {\thu@leaders\thecontentspage}
 \renewcommand\listofscores{%
   \ifthu@degree@bachelor
     \ifthu@backmatter\else
@@ -2994,6 +2985,10 @@
   \fi
   \thu@listof{score}%
 }
+\titlecontents{table}
+  [\z@]{}
+  {\contentspush{\tablename~\thecontentslabel\quad}}{}
+  {\thu@leaders\thecontentspage}
 \titlecontents{score}
   [\z@]{}
   {\contentspush{\scorename~\thecontentslabel\quad}}{}
@@ -3021,6 +3016,7 @@
   {\thu@equation@name~\thecontentslabel}{}
   {\nobreak\thu@leaders\nobreak\thecontentspage}
 \contentsuse{equation}{loe}
+\contentsuse{score}{los}
 \thu@define@key{
   cite-style = {
     name = cite@style,

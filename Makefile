@@ -28,6 +28,8 @@ all-dev: doc all
 cls: $(CLSFILE)
 
 $(CLSFILE): $(SOURCES)
+	@echo "Updating version from CHANGELOG.md..."
+	@python3 utils/update_version.py || echo "Warning: Failed to update version from CHANGELOG.md"
 	xetex $(PACKAGE).ins
 
 doc: $(PACKAGE).pdf

@@ -26,26 +26,16 @@
 
 ## 下载
 
-[//]: # (推荐下载**发布版**模板，里面包括具体使用说明以及示例文档：)
-
-[//]: # ()
-[//]: # (* 示例文档（`shcmthesis-example.pdf`）)
-
-[//]: # (在开始书写前，建议将 `shcmthesis-example.tex` 复制或重命名为其他有意义的名称。)
-
-[//]: # (### 下载途径)
-
 以下任一种方式均可获取模板
 
 ### 发布版
 
-  * 仅下载：
-    * [百度网盘](https://pan.baidu.com/s/1nAXSsBLNU1b4q73m6GfXbQ)（提取码: w7hu）
-    * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
-  * Overleaf在线编辑：
-    * [网页模板](https://www.overleaf.com/latex/templates/shcmthesis-shang-hai-yin-le-xue-yuan-xue-wei-lun-wen-latex-mo-ban/nmwwrrnkyyxx)（推荐）
-    * 手动上传: 参考[shcmthesis-example.pdf](shcmthesis-example.pdf)内“第二章LaTeX编译”
+- 仅下载：  
+  * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
 
+- 在线编辑：
+  * [TeXPage 模板]()
+  
 ### 开发版
   * [GitHub](https://github.com/antao97/shcmthesis.git)
 

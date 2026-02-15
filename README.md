@@ -18,9 +18,7 @@
 **声明**： 本模板依托于[清华大学学位论文 LaTex 模板](https://github.com/tuna/thuthesis.git)，根据[上海音乐学院研究生学位论文写作规范](https://yjsb.shcmusic.edu.cn/_t3/2023/0315/c2687a46645/page.htm)进行修改。
 本模板的修改内容主要为字号格式以及封面设计等，并将原先的文件名称`thuthesis`等统一改成了`shcmthesis`等。
 
-另外，本人并不是上海音乐学院的学生或者老师，受朋友所托开发编写，如格式有错误或者遗漏，欢迎指出。
-
-如果有疑问，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn）。
+作者现为上海音乐学院博士后，如果有疑问，或者格式有错误或者遗漏，欢迎指出，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn/taoan2008@shcmusic.edu.cn）。
 
 由于访问GitHub网站可能会遇到一些困难，本仓库同时发布了[知乎文档](https://zhuanlan.zhihu.com/p/14553247725)供转发使用。
 
@@ -83,8 +81,8 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
   * 介绍：选择本科（bachelor）、硕士（master）或者博士（doctor），会影响封面不同，其他部分不影响。
   * 待赋值变量：`degree`
 * 论文标题：
-  * 介绍：`-1`和`-2`分别对应标题的第一行和第二行，加`*`的为英文标题
-  * 待赋值变量：`title-1`、`title-1`、`title-1*`、`title-2*`
+  * 介绍：`-1`和`-2`分别对应标题的第一行和第二行，加`*`的为英文标题。如需更多行，可添加 `title-3`、`title-4` 等（中文）和 `title-3*`、`title-4*` 等（英文）
+  * 待赋值变量：`title-1`、`title-2`、`title-1*`、`title-2*`（可扩展）
 * 论文编号：
   * 待赋值变量：`thesis-id`
 * 学校代码：

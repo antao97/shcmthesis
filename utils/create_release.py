@@ -7,6 +7,7 @@ import argparse
 import subprocess
 import glob
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -60,20 +61,55 @@ def create_release_zip(version: str):
     logger.info(f"Release {release_zip} created with size {s.st_size} bytes")
 
 
+def get_latest_version_from_changelog():
+    """从CHANGELOG.md中读取最新版本号"""
+    changelog_path = pathlib.Path("CHANGELOG.md")
+    if not changelog_path.exists():
+        logger.warning("CHANGELOG.md not found, falling back to git tag")
+        return None
+
+    with open(changelog_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # 匹配格式：## [v1.2] - 2026-02-15，支持 v1.2、v1.2.3 等格式
+    pattern = r'^\s*##\s*\[(v\d+(?:\.\d+)*)\]\s*-\s*\d{4}-\d{2}-\d{2}'
+    match = re.search(pattern, content, re.MULTILINE)
+
+    if match:
+        latest_version = match.group(1)
+        logger.info(f"Found latest version in CHANGELOG.md: {latest_version}")
+        return latest_version
+    else:
+        logger.warning("No version found in CHANGELOG.md, falling back to git tag")
+        return None
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create release zip for shcmthesis")
     parser.add_argument("--version", required=False)
     parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--dry-run", action="store_true", help="只打印版本信息，不创建zip文件")
     args = parser.parse_args()
+
     if not args.version:
-        version = (
-            subprocess.check_output(["git", "describe", "--tags", "--always"])
-            .strip()
-            .decode("utf-8")
-        )
+        # 优先从CHANGELOG.md读取最新版本号
+        changelog_version = get_latest_version_from_changelog()
+        if changelog_version:
+            version = changelog_version
+        else:
+            # 回退到git tag
+            version = (
+                subprocess.check_output(["git", "describe", "--tags", "--always"])
+                .strip()
+                .decode("utf-8")
+            )
     else:
         version = args.version
+
     if args.debug:
         logger.setLevel(logging.DEBUG)
     logger.info(f"Creating release zip for version {version}")
-    create_release_zip(version)
+    if args.dry_run:
+        logger.info("Dry run mode enabled, skipping zip creation")
+    else:
+        create_release_zip(version)

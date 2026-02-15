@@ -8,7 +8,7 @@
 %% 
 %% This is a generated file.
 %% 
-%% Copyright (C) 2005-2024 by Tsinghua University TUNA Association <tuna@tsinghua.edu.cn>
+%% Copyright (C) 2005-2026 by Tsinghua University TUNA Association <tuna@tsinghua.edu.cn>
 %% 
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
@@ -1963,6 +1963,22 @@
     default = {Title},
     name    = title@two@en,
   },
+  title-3 = {
+    default = {标题},
+    name    = title@three,
+  },
+  title-4 = {
+    default = {标题},
+    name    = title@four,
+  },
+  title-3* = {
+    default = {Title},
+    name    = title@three@en,
+  },
+  title-4* = {
+    default = {Title},
+    name    = title@four@en,
+  },
   thesis-id = {
     default = {论文编号},
     name    = thesis@id,
@@ -2349,8 +2365,12 @@
     \ifthu@cover@final
       \thu@info@item{论文题目}{}{\thu@title@one}%
       \thu@info@item{}{}{\thu@title@two}%
+      \thu@info@item{}{}{\thu@title@three}%
+      \thu@info@item{}{}{\thu@title@four}%
       \thu@info@item{\quad Title}{}{\thu@title@one@en}%
       \thu@info@item{}{}{\thu@title@two@en}%
+      \thu@info@item{}{}{\thu@title@three@en}%
+      \thu@info@item{}{}{\thu@title@four@en}%
       \thu@info@item{作者姓名}{}{\thu@author}%
       \thu@info@item{学科专业}{}{\thu@discipline}%
       \thu@info@item{研究方向}{}{\thu@professional@field}%
@@ -2359,8 +2379,12 @@
     \else
       \thu@info@item{论文题目}{}{\thu@title@one}%
       \thu@info@item{}{}{\thu@title@two}%
+      \thu@info@item{}{}{\thu@title@three}%
+      \thu@info@item{}{}{\thu@title@four}%
       \thu@info@item{\quad Title}{}{\thu@title@one@en}%
       \thu@info@item{}{}{\thu@title@two@en}%
+      \thu@info@item{}{}{\thu@title@three@en}%
+      \thu@info@item{}{}{\thu@title@four@en}%
       \thu@info@item{学科专业}{}{\thu@discipline}%
       \thu@info@item{研究方向}{}{\thu@professional@field}%
       %\thu@info@item{指导教师}{\thu@name@title}{\thu@supervisor}%

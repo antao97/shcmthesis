@@ -31,6 +31,7 @@
 ### 发布版
 
 - 仅下载：  
+  * [百度网盘](https://pan.baidu.com/s/1nAXSsBLNU1b4q73m6GfXbQ)（提取码: w7hu）
   * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
 
 - 在线编辑：

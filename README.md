@@ -35,7 +35,7 @@
   * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
 
 - 在线编辑：
-  * [TeXPage 模板]()
+  * [TeXPage 模板](https://www.texpage.com/zh/template/2387f991-a81e-416f-ae68-2e0085f97310/)
   
 ### 开发版
   * [GitHub](https://github.com/antao97/shcmthesis.git)

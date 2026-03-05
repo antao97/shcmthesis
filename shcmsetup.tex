@@ -23,12 +23,12 @@
   %
   %
   % 学位类型
-  %   选择本科（bachelor）、硕士（master）或者博士（doctor）
+  %   选择本科（bachelor）、硕士（master）、博士（doctor）或者用于普通论文不申请学位（none）
   %
   degree = doctor,
   %
   %
-  % 论文标题
+  % 论文标题（如果不需要某行则置{}即可）
   %   -1和-2分别对应标题的第一行和第二行，加*的为英文标题
   %   如需更多行，可添加 title-3、title-4 等（中文）和 title-3*、title-4* 等（英文）
   %
@@ -42,40 +42,40 @@
   title-4* = {},
   %  
   %  
-  % 论文编号
+  % 论文编号（如果不需要此行则置{}即可）
   %
   thesis-id = {001},
   % 
   % 
-  % 学校代码
+  % 学校代码（如果不需要此行则置{}即可）
   % 
   school-id = {10278},
   %
   %
-  % 学科专业
+  % 学科专业（如果不需要此行则置{}即可）
   %
-  discipline  = {音乐与舞蹈学/中国音乐研究},
+  discipline  = {XXXXXX},
   %
-  % 研究方向
+  % 研究方向（如果不需要此行则置{}即可）
   %
-  professional-field  = {中国传统音乐理论},
+  professional-field  = {XXXXXX},
   %
-  % 作者姓名
+  % 作者姓名（如果不需要此行则置{}即可）
   %
-  author  = {李明},
+  author = {XX},
   %
-  % 作者学号
+  % 作者学号（如果不需要此行则置{}即可）
   %
-  student-id = {D202000},
+  student-id = {XXXXXX},
   %
-  % 指导教师
+  % 指导教师（如果不需要此行则置{}即可）
   %   中文姓名和职称之间以\quad分开
   %
-  supervisor  = {李红\quad 教授},
+  supervisor = {XXX\quad 教授},
   %
-  % 完成日期
+  % 完成日期（如果不需要此行则置{}即可）
   %
-  date = {2025年6月},
+  date = {XXXX年XX月},
   %
   % 是否在中文封面后的空白页生成书脊（默认 false）
   %
@@ -118,7 +118,28 @@
 \usepackage{algorithmic}
 
 % 代码块
-\usepackage{pythonhighlight}
+%\usepackage{pythonhighlight}
+\usepackage{listings}
+\lstnewenvironment{python}{\lstset{
+  language=[LaTeX]TeX,
+  basicstyle=\ttfamily,
+  breaklines=true,
+  frame=single,
+  tabsize=4,
+  showspaces=false,
+  showtabs=false,
+  tab={ }{4}
+}}{}
+\lstnewenvironment{latex}{\lstset{
+  language=[LaTeX]TeX,
+  basicstyle=\ttfamily,
+  breaklines=true,
+  frame=single,
+  tabsize=4,
+  showspaces=false,
+  showtabs=false,
+  tab={ }{4}}
+}{}
 
 % 量和单位
 \usepackage{siunitx}

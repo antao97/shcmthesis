@@ -2,6 +2,10 @@
 
 此处记载了 ShcmThesis 中所有值得留意的改动，格式参照 [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)。
 
+## [v1.2.1] - 2026-03-05
+
+新增无学位情况，即在`degree`处写`none`。
+
 ## [v1.2] - 2026-02-15
 
 支持多行论文标题：新增 `title-3`、`title-4`、`title-3*`、`title-4*` 字段，支持最多4行中文标题和4行英文标题

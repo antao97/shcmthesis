@@ -61,7 +61,7 @@
 }
 \hyphenation{Thu-Thesis}
 \def\thuthesis{thuthesis}
-\def\version{1.2}
+\def\version{1.2.1}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -150,6 +150,7 @@
       master,
       doctor,
       postdoc,
+      none,
     },
     default = doctor,
   },
@@ -2000,15 +2001,15 @@
     name    = title@four@en,
   },
   thesis-id = {
-    default = {论文编号},
+    default = \@empty,
     name    = thesis@id,
   },
   school-id = {
-    default = {学校代码},
+    default = \@empty,
     name    = school@id,
   },
   author = {
-    default = {姓名},
+    default = \@empty,
   },
   author* = {
     default = {Name of author},
@@ -2016,9 +2017,10 @@
   },
   student-id = {
     name = student@id,
+    default = \@empty,
   },
   supervisor = {
-    default = {导师姓名},
+    default = \@empty,
   },
   supervisor* = {
     default = {Name of supervisor},
@@ -2070,7 +2072,7 @@
     default = {计算机科学与技术系},
   },
   discipline = {
-    % default = {计算机科学与技术},
+    default = \@empty,
   },
   discipline* = {
     % default = {Computer Science and Technology},
@@ -2080,6 +2082,7 @@
 \thu@define@key{
   professional-field = {
     name    = professional@field,
+    default = \@empty,
   },
   professional-field* = {
     name    = professional@field@en,
@@ -2091,7 +2094,7 @@
     name    = engineering@field@en,
   },
   date = {
-    default = {\the\year-\two@digits{\month}-\two@digits{\day}},
+    default = \@empty,
   },
   clc,
   udc,
@@ -2231,7 +2234,7 @@
         \parbox[t][0cm][t]{\textwidth}{%
         \fangsong\sihao
         \hskip 370pt%
-        学校代码：\thu@school@id\par
+        \ifx\thu@school@id\@empty\else 学校代码：\thu@school@id\par\fi
       }%
       \endgroup
       \null\vskip 8.1pt%
@@ -2239,7 +2242,7 @@
         \parbox[t][0cm][t]{\textwidth}{%
           \fangsong\sihao
           \hskip 370pt%
-          学\quad\quad 号：\thu@student@id\par
+          \ifx\thu@student@id\@empty\else 学\quad\quad 号：\thu@student@id\par\fi
       }%
       \endgroup
       \vskip -50pt%

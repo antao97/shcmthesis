@@ -20,6 +20,8 @@
 
 作者现为上海音乐学院博士后，如果有疑问，或者格式有错误或者遗漏，欢迎指出，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn/taoan2008@shcmusic.edu.cn）。
 
+**声明：**本模板为非官方模板，在毕业设计时如果使用，请自行负责是否符合学校毕业设计论文格式的相关要求。若有需求修改模板内相关格式可以联系我。
+
 由于访问GitHub网站可能会遇到一些困难，本仓库同时发布了[知乎文档](https://zhuanlan.zhihu.com/p/14553247725)供转发使用。
 
 **转载须知：请尊重作者版权，不要删除模板的作者信息，如需转载请提供[知乎文档链接](https://zhuanlan.zhihu.com/p/14553247725)或者[GitHub网站](https://github.com/antao97/shcmthesis)链接。**
@@ -69,7 +71,7 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
   * 介绍：选择用于预审（preliminary）或用于最终提交的终版（final）
   * 待赋值变量：`cover`
 * 学位类型：
-  * 介绍：选择本科（bachelor）、硕士（master）或者博士（doctor），会影响封面不同，其他部分不影响。
+  * 介绍：选择本科（bachelor）、硕士（master）或者博士（doctor），会影响封面不同，其他部分不影响。如果是单纯完成论文，不申请学位，写`none`即可。
   * 待赋值变量：`degree`
 * 论文标题：
   * 介绍：`-1`和`-2`分别对应标题的第一行和第二行，加`*`的为英文标题。如需更多行，可添加 `title-3`、`title-4` 等（中文）和 `title-3*`、`title-4*` 等（英文）
@@ -88,6 +90,8 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
   * 待赋值变量：`supervisor`
 * 完成日期：
   * 待赋值变量：`date`
+  
+上述字段，如果有不需要的，直接置空为`{}`即可。
 
 #### 文字内容填写
 

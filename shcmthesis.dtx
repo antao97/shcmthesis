@@ -1327,7 +1327,7 @@
 %<*cls>
 \hyphenation{Thu-Thesis}
 \def\thuthesis{thuthesis}
-\def\version{1.2.1}
+\def\version{2.0}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -1968,7 +1968,7 @@
   \def\thu@list@algorithm@name{算法清单}%
   \def\listequationname{公式清单}%
   \def\thu@acknowledgements@name{致\quad 谢}%
-  \def\contentsname{目\quad 录}%
+  \def\contentsname{目\quad\quad 录}% 字空两字符
   \def\thu@denotation@name{符号和缩略语说明}%
   \def\thu@resume@name{个人简历、在学期间完成的相关学术成果}%
 
@@ -2092,8 +2092,9 @@
 % \subsubsection{字号}
 %
 % \begin{macro}{\normalsize}
-% 正文五号（10.5bp）字，行距为固定值 20 bp。
-% 其他字号的行距按照相同的比例设置。
+% 正文小四号（12bp）字，行距为 1.5 倍（18bp）。
+% 依据《上海音乐学院研究生学位论文写作规范（2026修订）》：
+% 正文宋体小四号、1.5 倍行距、两端对齐、段落首行缩进两字符。
 %
 % 注意重定义 \cs{normalsize} 应在 \pkg{unicode-math} 的 \cs{setmathfont} 前。
 %
@@ -2104,7 +2105,7 @@
 % 两种情况的折衷。
 %    \begin{macrocode}
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{10.5bp}{20bp}%
+  \@setfontsize\normalsize{12bp}{18bp}% 小四号，1.5 倍行距
   \abovedisplayskip 6bp%
   \abovedisplayshortskip 6bp%
   \belowdisplayshortskip 6bp%
@@ -3342,7 +3343,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% 定义脚注分割线，字号（宋体小五），以及悬挂缩进（1.5字符）。
+% 定义脚注分割线，字号（仿宋五号），以及悬挂缩进（1 字符）。
+% 依据 2026 修订规范：注文仿宋五号、单倍行距、悬挂缩进 1 字符。
 %    \begin{macrocode}
 \def\footnoterule{\vskip-3\p@\hrule\@width0.3\textwidth\@height0.4\p@\vskip2.6\p@}
 \footnotemargin=13.5bp
@@ -3354,7 +3356,7 @@
   \begingroup
     % 序号取消上标
     \def\@makefnmark{\hbox{\normalfont\@thefnmark}}%
-    \xiaowu
+    \fangsong\wuhao
     \ifFN@hangfoot
       \bgroup
       \setbox\@tempboxa\hbox{%
@@ -3370,7 +3372,7 @@
       \advance \linewidth -\leftmargin
       \parshape \@ne \leftmargin \linewidth
       % \footnotesize
-      \xiaowu
+      \fangsong\wuhao
       \@setpar{{\@@par}}%
       \leavevmode
       \llap{\box\@tempboxa}%
@@ -3395,6 +3397,28 @@
     \fi
   \endgroup
 }
+%    \end{macrocode}
+%
+%
+% \subsubsection{引文环境}
+% \label{sec:quote}
+% 依据《上海音乐学院研究生学位论文写作规范（2026修订）》：
+% 大段独立引文用楷体小四号，左右整体缩进两个字符，不再添加引号，
+% 引文末尾标注出处。
+%    \begin{macrocode}
+\renewenvironment{quote}
+  {\par\kaishu\linespread{1.5}\selectfont
+   \list{}{%
+     \leftmargin=2em
+     \rightmargin=2em
+     \parindent=\z@
+     \listparindent=\z@
+     \topsep=\z@
+     \parsep=\z@
+     \partopsep=\z@
+     \itemsep=\z@}%
+   \item\relax}
+  {\endlist}
 %    \end{macrocode}
 %
 %
@@ -3513,23 +3537,30 @@
 %    \end{macrocode}
 %
 % 允许用户设置图表编号的连接符。
+% 依据《上海音乐学院研究生学位论文写作规范（2026修订）》，
+% 图、表、谱例编号采用“章-序号”形式（如“图1-1”“表2-1”“谱例1-1”），
+% 故默认连接符设为短横线“-”。
 %    \begin{macrocode}
 \thu@define@key{
   figure-number-separator = {
     name    = figure@number@separator,
-    default = {.},
+    default = {-},
   },
   table-number-separator = {
     name    = table@number@separator,
-    default = {.},
+    default = {-},
   },
   equation-number-separator = {
     name    = equation@number@separator,
-    default = {.},
+    default = {-},
+  },
+  score-number-separator = {
+    name    = score@number@separator,
+    default = {-},
   },
   number-separator = {
     name    = number@separator,
-    default = {.},
+    default = {-},
   },
 }
 \renewcommand\thefigure{%
@@ -3568,47 +3599,56 @@
   \let\thu@score@number@separator\thu@number@separator
 }
 \thu@option@hook{number-separator}{\thu@set@number@separator}
+% 谱例编号分隔符没有独立的选项，需在初始化时由 number-separator 派生一次，
+% 否则未显式设置 number-separator 时谱例编号分隔符不会生效。
+\thu@set@number@separator
 %    \end{macrocode}
 %
-% 定制浮动图形和表格标题样式：
+% 定制浮动图形和表格标题样式（依据《上海音乐学院研究生学位论文写作规范（2026修订）》）：
 % \begin{itemize}
-%   \item 图表标题字体为 11pt
+%   \item 插图图题：小五号黑体，置于图片下方居中
+%   \item 表格表题：五号黑体，置于表格上方居中
+%   \item 谱例：五号黑体，置于谱例左上方缩进两字符
+%   \item 表格内文字：五号楷体
 %   \item 去掉图表号后面的冒号，图序与图名文字之间空一个汉字符宽度
 %   \item 图：caption 在下，段前空 6 磅，段后空 12 磅
 %   \item 表：caption 在上，段前空 12 磅，段后空 6 磅
 % \end{itemize}
 %    \begin{macrocode}
-\DeclareCaptionFont{thu}{%
-  \ifthu@degree@bachelor
-    \fontsize{11bp}{15bp}\selectfont
-  \else
-    \ifthu@language@chinese
-      \fontsize{11bp}{14.3bp}\selectfont
-    \else
-      \fontsize{11bp}{12.65bp}\selectfont
-    \fi
-  \fi
-}
+\DeclareCaptionFont{thu@figure}{\heiti\xiaowu}% 插图图题：小五号黑体
+\DeclareCaptionFont{thu@table}{\heiti\wuhao}%   表格表题：五号黑体
+\DeclareCaptionFont{thu@score}{\heiti\wuhao}%   谱例标题：五号黑体
 \captionsetup{
-  font           = thu,
   labelsep       = quad,
   skip           = 6bp,
   figureposition = bottom,
   tableposition  = top,
 }
-\captionsetup[sub]{font=thu}
+\captionsetup[figure]{font = thu@figure}
+\captionsetup[table]{font = thu@table}
+\captionsetup[sub]{labelsep=quad}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \DeclareCaptionType{score}
+% \pkg{caption} 的 \cs{DeclareCaptionType} 会重置 \cs{thescore} 为默认的点号分隔，
+% 这里需在之后重新设回本模板的“章-序号”形式（如“谱例1-1”）。
+\renewcommand\thescore{%
+  \ifnum\c@chapter>\z@
+    \thechapter
+    \thu@score@number@separator
+  \fi
+  \@arabic\c@score
+}
 \def\fnum@score{\scorename~\thescore}
+\captionsetup[score]{font = thu@score, position = top}
 % \renewcommand{\p@subfigure}{:}
 %    \end{macrocode}
 %
-% 研究生要求表单元格中的文字采用 11pt 宋体字，单倍行距。段前空 3 磅，段后空 3 磅。
-% 对于中文，\cs{arraystretch} 需要调整为 $1 + 6 / (11 \times 1.3) \approx 1.42$。
-% 对于英文，\cs{arraystretch} 需要调整为 $1 + 6 / (11 \times 1.15) \approx 1.47$。
+% 研究生要求表单元格中的文字采用五号楷体字，单倍行距。段前空 3 磅，段后空 3 磅。
+% 对于中文，\cs{arraystretch} 需要调整为 $1 + 6 / (10.5 \times 1.3) \approx 1.44$。
+% 对于英文，\cs{arraystretch} 需要调整为 $1 + 6 / (10.5 \times 1.15) \approx 1.50$。
 %
-% 注意不能简单地把行距设为 $\SI{11}{pt} \times 1.3 + \SI{6}{pt} = \SI{20.3}{pt}$，
+% 注意不能简单地把行距设为 $\SI{10.5}{pt} \times 1.3 + \SI{6}{pt} = \SI{19.65}{pt}$，
 % 这会导致含有多行文字的单元格中行距有误。
 %
 % 其他浮动体中（比如 \env{algorithm}）的字号默认同表格一致。
@@ -3616,13 +3656,13 @@
 \newcommand\thu@set@table@font{
   \ifthu@language@chinese
     \def\thu@table@font{%
-      \fontsize{11bp}{14.3bp}\selectfont
-      \renewcommand\arraystretch{1.42}%
+      \kaishu\wuhao% 表格内文字：五号楷体
+      \renewcommand\arraystretch{1.44}%
     }%
   \else
     \def\thu@table@font{%
-      \fontsize{11bp}{12.65bp}\selectfont
-      \renewcommand\arraystretch{1.47}%
+      \fontsize{10.5bp}{12.65bp}\selectfont
+      \renewcommand\arraystretch{1.50}%
     }%
   \fi
 }
@@ -3669,7 +3709,7 @@
   \newcommand{\thu@abstract@name}{中文摘要}
   \newcommand{\thu@abstract@name@en}{ABSTRACT}
 \else
-  \newcommand{\thu@abstract@name}{摘\quad 要}
+  \newcommand{\thu@abstract@name}{摘\quad\quad 要}% 字空两字符
   \newcommand{\thu@abstract@name@en}{Abstract}
 \fi
 %    \end{macrocode}
@@ -3681,7 +3721,6 @@
     nameformat   = {},
     numberformat = {},
     titleformat  = {},
-    fixskip      = true,
     afterindent  = true,
     lofskip      = 0pt,
     lotskip      = 0pt,
@@ -3738,22 +3777,22 @@
       number     = {\chinese{part}},
     },
     chapter = {
-      beforeskip = 36bp,
-      afterskip  = 36bp,
+      beforeskip = 24bp,
+      afterskip  = 24bp,
       number     = {\chinese{chapter}},
     },
     section = {
-      beforeskip = 30bp,
+      beforeskip = 24bp,
       afterskip  = 24bp,
       number     = {\chinese{section}},
     },
     subsection = {
-      beforeskip = 18bp,
-      afterskip  = 12bp,
+      beforeskip = 12bp,
+      afterskip  = 6bp,
       number     = {\chinese{subsection}},
     },
     subsubsection = {
-      beforeskip = 8bp,
+      beforeskip = 0bp,
       afterskip  = 0bp,
       number     = {\chinese{subsubsection}},
     },
@@ -3781,17 +3820,17 @@
       aftername   = \quad,
     },
     subsection = {
-      format     = \sihao\bfseries,
+      format     = \songti\fontsize{14bp}{20bp}\bfseries\selectfont,
       nameformat  = {},
       titleformat = {},
-      name        = {\quad~~,、},
+      name        = {\hspace*{24bp},、},
       aftername   = {},
     },
     subsubsection = {
-      format     = \wuhao,
+      format     = \songti\xiaosi[1.5],
       nameformat  = {},
       titleformat = {},
-      name        = {\quad~~（,）},
+      name        = {\hspace*{24bp}（,）},
       aftername   = {},
     },
   }%
@@ -3905,7 +3944,7 @@
     default = arial,
   },
 }
-\newcommand\thu@leaders{\nobreak\titlerule*[4bp]{.}\nobreak}
+\newcommand\thu@leaders{\nobreak\titlerule*[2bp]{.}\nobreak}
 \newcommand\thu@set@toc@format{%
   \contentsmargin{\z@}%
 %    \end{macrocode}
@@ -3929,21 +3968,17 @@
     {\rmfamily\thu@leaders\thecontentspage}%
   \titlecontents{chapter}
     [\z@]{\addvspace{6bp}
-      \ifthu@toc@chapter@style@arial
-        \sffamily
-      \else
-        \heiti
-      \fi
+      \heiti
     }
     {\contentspush{\thecontentslabel\quad}}{}
-    {\rmfamily\thu@leaders\thecontentspage}%
+    {\thu@leaders\thecontentspage}%
   \titlecontents{section}
     [2em]{}
     {\contentspush{\thecontentslabel\quad}}{}
     {\thu@leaders\thecontentspage}%
   \titlecontents{subsection}
-    [2.5em]{}
-    {\contentspush{\thecontentslabel}}{}
+    [2em]{}
+    {\contentspush{\thecontentslabel\hspace{0.5em}}}{}
     {\thu@leaders\thecontentspage}%
 }
 \thu@set@toc@format
@@ -6237,11 +6272,11 @@
   partopsep  = 0bp,
   itemsep    = 0bp,
   parsep     = 0bp,
-  leftmargin = 6mm,
-  itemindent = 0pt,
-  align      = left,
-  label      = \arabic*.~,
-  labelsep   = -7bp,
+  leftmargin = 2.3em,
+  labelwidth = 1.8em,
+  labelsep   = 0.5em,
+  align      = right,
+  label      = \arabic*.,
   resume     = achievements,
 }
 %    \end{macrocode}
@@ -6346,7 +6381,10 @@
   breaklinks         = true,
   plainpages         = false,
   pdfdisplaydoctitle = true,
-  hidelinks,
+  colorlinks         = true,
+  linkcolor          = black,
+  citecolor          = black,
+  urlcolor           = black,
 }{hyperref}
 \AtEndOfPackageFile*{hyperref}{
   \newcounter{thu@bookmark}

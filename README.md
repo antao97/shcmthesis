@@ -33,7 +33,7 @@
 ### 发布版
 
 - 仅下载：  
-  * [百度网盘](https://pan.baidu.com/s/1nAXSsBLNU1b4q73m6GfXbQ)（提取码: w7hu）
+  * [百度网盘](https://pan.baidu.com/s/1vyxE-ZGX_jZUl5jFMhEDPA?pwd=uy4d)（提取码: uy4d）
   * [GitHub Releases](https://github.com/antao97/shcmthesis/releases/)：最新版的及时发布途径。
 
 - 在线编辑：

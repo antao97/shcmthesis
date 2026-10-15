@@ -182,7 +182,7 @@ must be in want of a wife.
 多个连续空格在 LaTeX 中被视为一个空格。多个连续空行被视为一个空行。空行的主要功能是开始一个新的段落。通常来说，LaTeX 忽略空行和其他空白字符，两个反斜杠（\textbackslash\textbackslash）可以被用来换行。
 
 如果你想要在你的文档中添加空格，你可以通过添加~从而添加空格。
-或者 \textbackslash vaspace\{...\} 的命令，这样可以添加竖着的空格，高度可以指定。如 \textbackslash vspace\{12pt\} 会产生一个空格，高度等于 12pt 的文字的高度。
+或者 \textbackslash vspace\{...\} 的命令，这样可以添加竖着的空格，高度可以指定。如 \textbackslash vspace\{12pt\} 会产生一个空格，高度等于 12pt 的文字的高度。
 
 \section{脚注}
 
@@ -251,11 +251,10 @@ LaTeX 默认表格是没有横向和竖向的分割线的——如果你需要�
 \begin{python}
 \begin{center}
 \begin{tabular}{|r|l|}
-	\centering
 	\hline
 	8              & here's \\
-	\cline 86 & stuff  \\
-	\hline
+	\cline{2-2}
+	86 & stuff  \\
 	\hline
 	2008           & now    \\
 	\hline
@@ -325,7 +324,7 @@ c 表示一个向中对齐的列；
 
 效果如下：
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\caption{三线表示例}
 	\begin{tabular}{ll}
@@ -371,7 +370,7 @@ c 表示一个向中对齐的列；
 
 效果如下：
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{threeparttable}[c]
 		\caption{带附注的表格示例}
@@ -498,7 +497,7 @@ c 表示一个向中对齐的列；
 
 效果如下：
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{example-image-a.pdf}
 	\caption*{国外的期刊习惯将图表的标题和说明文字写成一段，需要改写为标题只含图表的名称，其他说明文字以注释方式写在图表下方，或者写在正文中。}
@@ -542,7 +541,7 @@ width=1\textbackslash textwidth 是一个可选的参数，它指定图片的宽
 
 效果如下：
 
-\begin{figure}
+\begin{figure}[H]
 	\centering
 	\subcaptionbox{分图 A\label{fig:subfig-a}}
 	{\includegraphics[width=0.35\linewidth]{example-image-a.pdf}}
@@ -585,7 +584,7 @@ width=1\textbackslash textwidth 是一个可选的参数，它指定图片的宽
 
 效果如下：
 
-\begin{score}
+\begin{score}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{example-image-a.pdf}
 	\caption{示例谱例标题}

@@ -61,7 +61,7 @@
 }
 \hyphenation{Thu-Thesis}
 \def\thuthesis{thuthesis}
-\def\version{1.2.1}
+\def\version{2.0}
 \RequirePackage{kvdefinekeys}
 \RequirePackage{kvsetkeys}
 \RequirePackage{kvoptions}
@@ -472,7 +472,7 @@
   \def\thu@list@algorithm@name{算法清单}%
   \def\listequationname{公式清单}%
   \def\thu@acknowledgements@name{致\quad 谢}%
-  \def\contentsname{目\quad 录}%
+  \def\contentsname{目\quad\quad 录}% 字空两字符
   \def\thu@denotation@name{符号和缩略语说明}%
   \def\thu@resume@name{个人简历、在学期间完成的相关学术成果}%
 
@@ -562,7 +562,7 @@
 \thu@set@punctuations
 \thu@option@hook{language}{\thu@set@punctuations}
 \renewcommand\normalsize{%
-  \@setfontsize\normalsize{10.5bp}{20bp}%
+  \@setfontsize\normalsize{12bp}{18bp}% 小四号，1.5 倍行距
   \abovedisplayskip 6bp%
   \abovedisplayshortskip 6bp%
   \belowdisplayshortskip 6bp%
@@ -1527,7 +1527,7 @@
   \begingroup
     % 序号取消上标
     \def\@makefnmark{\hbox{\normalfont\@thefnmark}}%
-    \xiaowu
+    \fangsong\wuhao
     \ifFN@hangfoot
       \bgroup
       \setbox\@tempboxa\hbox{%
@@ -1543,7 +1543,7 @@
       \advance \linewidth -\leftmargin
       \parshape \@ne \leftmargin \linewidth
       % \footnotesize
-      \xiaowu
+      \fangsong\wuhao
       \@setpar{{\@@par}}%
       \leavevmode
       \llap{\box\@tempboxa}%
@@ -1568,6 +1568,19 @@
     \fi
   \endgroup
 }
+\renewenvironment{quote}
+  {\par\kaishu\linespread{1.5}\selectfont
+   \list{}{%
+     \leftmargin=2em
+     \rightmargin=2em
+     \parindent=\z@
+     \listparindent=\z@
+     \topsep=\z@
+     \parsep=\z@
+     \partopsep=\z@
+     \itemsep=\z@}%
+   \item\relax}
+  {\endlist}
 \allowdisplaybreaks[4]
 \newcommand\thu@eqn@left@paren{（}
 \newcommand\thu@eqn@right@paren{）}
@@ -1643,19 +1656,23 @@
 \thu@define@key{
   figure-number-separator = {
     name    = figure@number@separator,
-    default = {.},
+    default = {-},
   },
   table-number-separator = {
     name    = table@number@separator,
-    default = {.},
+    default = {-},
   },
   equation-number-separator = {
     name    = equation@number@separator,
-    default = {.},
+    default = {-},
+  },
+  score-number-separator = {
+    name    = score@number@separator,
+    default = {-},
   },
   number-separator = {
     name    = number@separator,
-    default = {.},
+    default = {-},
   },
 }
 \renewcommand\thefigure{%
@@ -1694,39 +1711,41 @@
   \let\thu@score@number@separator\thu@number@separator
 }
 \thu@option@hook{number-separator}{\thu@set@number@separator}
-\DeclareCaptionFont{thu}{%
-  \ifthu@degree@bachelor
-    \fontsize{11bp}{15bp}\selectfont
-  \else
-    \ifthu@language@chinese
-      \fontsize{11bp}{14.3bp}\selectfont
-    \else
-      \fontsize{11bp}{12.65bp}\selectfont
-    \fi
-  \fi
-}
+\thu@set@number@separator
+\DeclareCaptionFont{thu@figure}{\heiti\xiaowu}% 插图图题：小五号黑体
+\DeclareCaptionFont{thu@table}{\heiti\wuhao}%   表格表题：五号黑体
+\DeclareCaptionFont{thu@score}{\heiti\wuhao}%   谱例标题：五号黑体
 \captionsetup{
-  font           = thu,
   labelsep       = quad,
   skip           = 6bp,
   figureposition = bottom,
   tableposition  = top,
 }
-\captionsetup[sub]{font=thu}
+\captionsetup[figure]{font = thu@figure}
+\captionsetup[table]{font = thu@table}
+\captionsetup[sub]{labelsep=quad}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
 \renewcommand{\thesubtable}{(\alph{subtable})}
 \DeclareCaptionType{score}
+\renewcommand\thescore{%
+  \ifnum\c@chapter>\z@
+    \thechapter
+    \thu@score@number@separator
+  \fi
+  \@arabic\c@score
+}
 \def\fnum@score{\scorename~\thescore}
+\captionsetup[score]{font = thu@score, position = top}
 \newcommand\thu@set@table@font{
   \ifthu@language@chinese
     \def\thu@table@font{%
-      \fontsize{11bp}{14.3bp}\selectfont
-      \renewcommand\arraystretch{1.42}%
+      \kaishu\wuhao% 表格内文字：五号楷体
+      \renewcommand\arraystretch{1.44}%
     }%
   \else
     \def\thu@table@font{%
-      \fontsize{11bp}{12.65bp}\selectfont
-      \renewcommand\arraystretch{1.47}%
+      \fontsize{10.5bp}{12.65bp}\selectfont
+      \renewcommand\arraystretch{1.50}%
     }%
   \fi
 }
@@ -1751,7 +1770,7 @@
   \newcommand{\thu@abstract@name}{中文摘要}
   \newcommand{\thu@abstract@name@en}{ABSTRACT}
 \else
-  \newcommand{\thu@abstract@name}{摘\quad 要}
+  \newcommand{\thu@abstract@name}{摘\quad\quad 要}% 字空两字符
   \newcommand{\thu@abstract@name@en}{Abstract}
 \fi
 \ctexset{%
@@ -1759,7 +1778,6 @@
     nameformat   = {},
     numberformat = {},
     titleformat  = {},
-    fixskip      = true,
     afterindent  = true,
     lofskip      = 0pt,
     lotskip      = 0pt,
@@ -1783,22 +1801,22 @@
       number     = {\chinese{part}},
     },
     chapter = {
-      beforeskip = 36bp,
-      afterskip  = 36bp,
+      beforeskip = 24bp,
+      afterskip  = 24bp,
       number     = {\chinese{chapter}},
     },
     section = {
-      beforeskip = 30bp,
+      beforeskip = 24bp,
       afterskip  = 24bp,
       number     = {\chinese{section}},
     },
     subsection = {
-      beforeskip = 18bp,
-      afterskip  = 12bp,
+      beforeskip = 12bp,
+      afterskip  = 6bp,
       number     = {\chinese{subsection}},
     },
     subsubsection = {
-      beforeskip = 8bp,
+      beforeskip = 0bp,
       afterskip  = 0bp,
       number     = {\chinese{subsubsection}},
     },
@@ -1826,17 +1844,17 @@
       aftername   = \quad,
     },
     subsection = {
-      format     = \sihao\bfseries,
+      format     = \songti\fontsize{14bp}{20bp}\bfseries\selectfont,
       nameformat  = {},
       titleformat = {},
-      name        = {\quad~~,、},
+      name        = {\hspace*{24bp},、},
       aftername   = {},
     },
     subsubsection = {
-      format     = \wuhao,
+      format     = \songti\xiaosi[1.5],
       nameformat  = {},
       titleformat = {},
-      name        = {\quad~~（,）},
+      name        = {\hspace*{24bp}（,）},
       aftername   = {},
     },
   }%
@@ -1919,7 +1937,7 @@
     default = arial,
   },
 }
-\newcommand\thu@leaders{\nobreak\titlerule*[4bp]{.}\nobreak}
+\newcommand\thu@leaders{\nobreak\titlerule*[2bp]{.}\nobreak}
 \newcommand\thu@set@toc@format{%
   \contentsmargin{\z@}%
   \titlecontents{part}
@@ -1934,21 +1952,17 @@
     {\rmfamily\thu@leaders\thecontentspage}%
   \titlecontents{chapter}
     [\z@]{\addvspace{6bp}
-      \ifthu@toc@chapter@style@arial
-        \sffamily
-      \else
-        \heiti
-      \fi
+      \heiti
     }
     {\contentspush{\thecontentslabel\quad}}{}
-    {\rmfamily\thu@leaders\thecontentspage}%
+    {\thu@leaders\thecontentspage}%
   \titlecontents{section}
     [2em]{}
     {\contentspush{\thecontentslabel\quad}}{}
     {\thu@leaders\thecontentspage}%
   \titlecontents{subsection}
-    [2.5em]{}
-    {\contentspush{\thecontentslabel}}{}
+    [2em]{}
+    {\contentspush{\thecontentslabel\hspace{0.5em}}}{}
     {\thu@leaders\thecontentspage}%
 }
 \thu@set@toc@format
@@ -3737,11 +3751,11 @@
   partopsep  = 0bp,
   itemsep    = 0bp,
   parsep     = 0bp,
-  leftmargin = 6mm,
-  itemindent = 0pt,
-  align      = left,
-  label      = \arabic*.~,
-  labelsep   = -7bp,
+  leftmargin = 2.3em,
+  labelwidth = 1.8em,
+  labelsep   = 0.5em,
+  align      = right,
+  label      = \arabic*.,
   resume     = achievements,
 }
 \newenvironment{publications}{%
@@ -3808,7 +3822,10 @@
   breaklinks         = true,
   plainpages         = false,
   pdfdisplaydoctitle = true,
-  hidelinks,
+  colorlinks         = true,
+  linkcolor          = black,
+  citecolor          = black,
+  urlcolor           = black,
 }{hyperref}
 \AtEndOfPackageFile*{hyperref}{
   \newcounter{thu@bookmark}

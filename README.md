@@ -13,12 +13,12 @@
 
 **ShcmThesis** 是 **Sh**anghai **C**onservatory of **M**usic **Thesis** LaTeX Template 的缩写。
 
-此宏包旨在建立一个简单易用的上海音乐学院学位论文 LaTeX 模板，包括本科综合论文训练、硕士论文以及博士论文。
+此宏包旨在建立一个简单易用的 SHCM 学位论文 LaTeX 模板，包括本科综合论文训练、硕士论文以及博士论文。
 
-本模板依托于[清华大学学位论文 LaTex 模板](https://github.com/tuna/thuthesis.git)，依据《上海音乐学院研究生学位论文写作规范（2026修订）》进行修改。
+本模板依托于[THU学位论文 LaTex 模板](https://github.com/tuna/thuthesis.git)，依据《研究生学位论文写作规范（2026修订）》进行修改。
 本模板的修改内容主要为字号格式以及封面设计等，并将原先的文件名称`thuthesis`等统一改成了`shcmthesis`等。
 
-作者现为上海音乐学院博士后，如果有疑问，或者格式有错误或者遗漏，欢迎指出，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn/taoan2008@shcmusic.edu.cn）。
+作者现为SHCM博士后，如果有疑问，或者格式有错误或者遗漏，欢迎指出，可以在GitHub的[Issue页面](https://github.com/antao97/shcmthesis/issues)提出问题，或者发邮件给作者（taoan2008@live.cn/taoan2008@shcmusic.edu.cn）。
 
 **声明**：本模板为非官方模板，在毕业设计时如果使用，请自行负责是否符合学校毕业设计论文格式的相关要求。若有需求修改模板内相关格式可以联系我。
 
@@ -203,7 +203,7 @@ LaTeX 基于 TeX（Donald Knuth 在 1978 年为数字化排版设计的排版系
 
 ### 论文字数要求
 
-依据《上海音乐学院研究生学位论文写作规范（2026修订）》，正文字数（不含谱例、图表、注释、参考文献及附录）要求如下：
+依据《研究生学位论文写作规范（2026修订）》，正文字数（不含谱例、图表、注释、参考文献及附录）要求如下：
 
 * 博士学位论文：
   * 学术学位：正文 ≥ 100000 字
